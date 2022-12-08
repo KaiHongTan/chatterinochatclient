@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="546.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hep88.view.MainWindowController">
+   <right>
+      <AnchorPane prefHeight="433.0" prefWidth="600.0" style="-fx-background-color: #272727;" BorderPane.alignment="CENTER">
+         <children>
+            <GridPane layoutX="341.0" layoutY="106.0" AnchorPane.leftAnchor="341.0" AnchorPane.topAnchor="106.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="94.0" minWidth="10.0" prefWidth="73.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="137.0" minWidth="10.0" prefWidth="127.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Name" textFill="WHITE">
+                     <font>
+                        <Font name="Gotham Medium" size="14.0" />
+                     </font></Label>
+                  <TextField fx:id="txtName" prefHeight="28.0" prefWidth="127.0" promptText="Choose your name" style="-fx-background-color: Gainsboro;" GridPane.columnIndex="1">
+                     <font>
+                        <Font name="Gotham Light" size="12.0" />
+                     </font>
+                  </TextField>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#handleJoin" prefHeight="21.0" prefWidth="86.0" style="-fx-background-color: Silver;" text="Join Chat!" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="Gotham Light" size="12.0" />
+                     </font></Button>
+                  <Label text="Status" textFill="WHITE" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Gotham Medium" size="14.0" />
+                     </font></Label>
+                  <Label fx:id="lblStatus" text="Not Joined" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Label>
+               </children>
+            </GridPane>
+            <ListView fx:id="listMessage" layoutX="32.0" layoutY="116.0" prefHeight="285.0" prefWidth="237.0" style="-fx-background-color: Gainsboro;" />
+            <ListView fx:id="listUser" layoutX="341.0" layoutY="259.0" prefHeight="141.0" prefWidth="200.0" style="-fx-background-color: Gainsboro;" />
+            <TextField fx:id="txtMessage" layoutX="133.0" layoutY="450.0" prefHeight="75.0" prefWidth="241.0" promptText="Enter your message here" style="-fx-background-color: Gainsboro;">
+               <font>
+                  <Font name="Gotham Light" size="14.0" />
+               </font></TextField>
+            <Label layoutX="130.0" layoutY="421.0" text="Message to Send" textFill="WHITE">
+               <font>
+                  <Font name="Gotham Medium" size="15.0" />
+               </font></Label>
+            <Button layoutX="407.0" layoutY="461.0" mnemonicParsing="false" onAction="#handleSend" prefHeight="52.0" prefWidth="137.0" style="-fx-background-color: Silver;" text="Send Message">
+               <font>
+                  <Font name="Gotham Light" size="15.0" />
+               </font></Button>
+            <Label layoutX="194.0" layoutY="34.0" text="Chatterino" textFill="WHITE">
+               <font>
+                  <Font name="Gotham Black" size="39.0" />
+               </font>
+            </Label>
+            <Label layoutX="32.0" layoutY="89.0" text="Messages" textFill="WHITE">
+               <font>
+                  <Font name="Gotham Medium" size="15.0" />
+               </font>
+            </Label>
+            <Label layoutX="341.0" layoutY="235.0" text="User List" textFill="WHITE">
+               <font>
+                  <Font name="Gotham Medium" size="15.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="117.0" fitWidth="129.0" layoutY="429.0">
+               <image>
+                  <Image url="/58486a72849cf46a2a931338.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>
