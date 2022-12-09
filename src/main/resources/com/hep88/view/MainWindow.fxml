@@ -4,8 +4,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -13,6 +11,8 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="546.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hep88.view.MainWindowController">
    <right>
       <AnchorPane prefHeight="433.0" prefWidth="600.0" style="-fx-background-color: #272727;" BorderPane.alignment="CENTER">
@@ -61,10 +61,15 @@
                <font>
                   <Font name="Gotham Medium" size="15.0" />
                </font></Label>
-            <Button layoutX="407.0" layoutY="461.0" mnemonicParsing="false" onAction="#handleSend" prefHeight="52.0" prefWidth="137.0" style="-fx-background-color: Silver;" text="Send Message">
+            <Button layoutX="407.0" layoutY="438.0" mnemonicParsing="false" onAction="#handleSend" prefHeight="39.0" prefWidth="137.0" style="-fx-background-color: Silver;" text="Send Message">
                <font>
                   <Font name="Gotham Light" size="15.0" />
                </font></Button>
+            <Button alignment="CENTER" layoutX="385.0" layoutY="488.0" mnemonicParsing="false" onAction="#handleSendGlobal" prefHeight="38.0" prefWidth="181.0" style="-fx-background-color: Silver;" text="Send Global Message" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Gotham Light" size="15.0" />
+               </font>
+            </Button>
             <Label layoutX="194.0" layoutY="34.0" text="Chatterino" textFill="WHITE">
                <font>
                   <Font name="Gotham Black" size="39.0" />

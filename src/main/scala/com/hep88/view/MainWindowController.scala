@@ -37,11 +37,17 @@ private val txtMessage: TextField) {
       val selectedUser = listUser.selectionModel().selectedItem.value
       Client.userRef ! ChatClient.SendMessageL(selectedUser.ref,
         txtMessage.text(), txtName.text())
-      addText(txtMessage.text(), "You: ")
+      addText(txtMessage.text(), "You", isGlobal = false)
     }
   }
-  def addText(text: String, sender:String): Unit = {
-    receivedText += sender +": "+ text
+  def handleSendGlobal(actionEvent: ActionEvent): Unit = {
+    chatClientRef map (_ ! ChatClient.SendGlobalMessage(txtMessage.text(), txtName.text()))
+    addText(txtMessage.text(), "You", isGlobal = true)
+  }
+  def addText(text: String, sender:String, isGlobal:Boolean): Unit = {
+    if(isGlobal) receivedText += sender +" (Global): "+ text
+    if(!isGlobal) receivedText += sender +": "+ text
+
   }
 
 }

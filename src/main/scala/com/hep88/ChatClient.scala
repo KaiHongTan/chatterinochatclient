@@ -1,10 +1,10 @@
 package com.hep88
-import akka.actor.typed.{ActorRef, PostStop, ActorSystem, Behavior}
+import akka.actor.typed.{ActorRef, ActorSystem, Behavior, PostStop}
 import akka.actor.typed.scaladsl.Behaviors
-import akka.actor.typed.receptionist.{Receptionist,ServiceKey}
+import akka.actor.typed.receptionist.{Receptionist, ServiceKey}
 import akka.cluster.typed._
-import akka.{ actor => classic }
-import akka.discovery.{Discovery,Lookup, ServiceDiscovery}
+import akka.{actor => classic}
+import akka.discovery.{Discovery, Lookup, ServiceDiscovery}
 import akka.discovery.ServiceDiscovery.Resolved
 import akka.actor.typed.scaladsl.adapter._
 import com.hep88.protocol.JsonSerializable
@@ -15,6 +15,7 @@ import akka.cluster.ClusterEvent.ReachableMember
 import akka.cluster.ClusterEvent.UnreachableMember
 import akka.cluster.ClusterEvent.MemberEvent
 import akka.actor.Address
+import scalafx.scene.control.ListView
 
 
 object ChatClient {
@@ -23,6 +24,7 @@ object ChatClient {
     case object start extends Command
     case class StartJoin(name: String) extends Command
    final case class SendMessageL(target: ActorRef[ChatClient.Command], content: String, prefix: String) extends Command
+  final case class SendGlobalMessage( text: String, sender: String) extends Command
 
     final case object FindTheServer extends Command
     private case class ListingResponse(listing: Receptionist.Listing) extends Command
@@ -46,20 +48,24 @@ object ChatClient {
 //chat protocol
   final case class MemberList(list: Iterable[User]) extends Command
   final case class Joined(list: Iterable[User]) extends Command
-  final case class Message(msg: String, from: ActorRef[ChatClient.Command], prefix: String) extends Command
+  final case class Message(msg: String, from: ActorRef[ChatClient.Command], prefix: String, isGlobal: Boolean) extends Command
 
   var defaultBehavior: Option[Behavior[ChatClient.Command]] = None
   var remoteOpt: Option[ActorRef[ChatServer.Command]] = None 
   var nameOpt: Option[String] = None
 
+
     def messageStarted(): Behavior[ChatClient.Command] = Behaviors.receive[ChatClient.Command] { (context, message) => 
         message match {
             case SendMessageL(target, content, prefix) =>
-              target ! Message(content, context.self, prefix)
+              target ! Message(content, context.self, prefix, isGlobal = false)
                 Behaviors.same
-            case Message(msg, from, prefix) =>
+            case SendGlobalMessage(text, sender) =>
+              for (member <- members) if(member.ref != context.self.ref) member.ref ! Message(text, context.self, sender, isGlobal = true)
+              Behaviors.same
+            case Message(msg, from, prefix, isGlobal) =>
               Platform.runLater {
-                Client.control.addText(msg, prefix)
+                Client.control.addText(msg, prefix, isGlobal)
               }
                 Behaviors.same
             case MemberList(list: Iterable[User]) =>
